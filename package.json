@@ -1,0 +1,21 @@
+{
+  "name": "zinnov-gmr-inventory",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Zinnov Growth Mindset & Resilience Inventory — candidate self-assessment and HR panel report",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "create-hr": "node scripts/create-hr.mjs",
+    "test": "node scripts/verify-scoring.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.16"
+  }
+}

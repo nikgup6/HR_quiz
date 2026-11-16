@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Growth Mindset &amp; Resilience Inventory · Zinnov</title>
+  <meta name="description" content="Candidate self-assessment for the Zinnov Growth Mindset & Resilience Inventory.">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/assessment.css">
+  <script type="module" src="/assets/js/assessment.js"></script>
+</head>
+<body class="assess">
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/">
+        <span class="brand-mark">Zinnov<span>.</span></span>
+        <span class="brand-sub">Growth Mindset &amp; Resilience Inventory</span>
+      </a>
+      <div class="spacer"></div>
+      <button class="btn btn-quiet btn-sm" type="button" data-open-scale hidden>Rating guide</button>
+    </div>
+    <div class="progress-rail" aria-hidden="true"><i></i></div>
+  </header>
+
+  <main id="app" class="wrap" tabindex="-1">
+    <!-- ======================= Step: intro & details ======================= -->
+    <section class="step step-intro" data-step="intro">
+      <div class="intro-grid">
+        <div class="intro-copy">
+          <p class="eyebrow">Candidate self-assessment</p>
+          <h1 class="display">Growth Mindset &amp; <em>Resilience</em> Inventory</h1>
+          <p class="lede">Rate how consistently each statement reflects your workplace behaviour. Complete all 25 items.</p>
+
+          <dl class="facts">
+            <div><dt class="mono">25</dt><dd>statements</dd></div>
+            <div><dt class="mono">5</dt><dd>behaviours</dd></div>
+            <div><dt class="mono">1–5</dt><dd>rating scale</dd></div>
+          </dl>
+
+          <ol class="behaviour-list" data-behaviour-list></ol>
+
+          <div class="scale-preview">
+            <p class="eyebrow">The rating scale</p>
+            <ul data-scale-list class="scale-list"></ul>
+          </div>
+        </div>
+
+        <form class="card card-pad details" data-details-form novalidate>
+          <h2 class="h2">Your details</h2>
+          <p class="muted small details-intro">No account needed. Your responses are shared only with the hiring panel.</p>
+
+          <div class="field">
+            <label for="f-name">Full name</label>
+            <input class="input" id="f-name" name="name" autocomplete="name" required maxlength="120">
+            <span class="err" data-err="name"></span>
+          </div>
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input class="input" id="f-email" name="email" type="email" autocomplete="email" required maxlength="160">
+            <span class="err" data-err="email"></span>
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone number</label>
+            <input class="input" id="f-phone" name="phone" type="tel" autocomplete="tel" required maxlength="24" placeholder="+91 98765 43210">
+            <span class="err" data-err="phone"></span>
+          </div>
+          <div class="field">
+            <label for="f-role">Role / track <span class="opt">(optional)</span></label>
+            <input class="input" id="f-role" name="roleTrack" maxlength="120" placeholder="e.g. Delivery Manager">
+          </div>
+          <div class="honeypot" aria-hidden="true">
+            <label for="f-website">Website</label>
+            <input id="f-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
+
+          <button class="btn btn-accent start-btn" type="submit">Begin assessment <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="resume-note small muted" data-resume-note hidden>Your earlier answers on this device have been restored.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ======================= Step: sections ======================= -->
+    <section class="step step-items" data-step="items" hidden>
+      <header class="section-head">
+        <p class="eyebrow" data-section-count></p>
+        <h1 class="h2 section-title" data-section-title></h1>
+        <p class="muted small keys-tip">Tip: focus a statement and press <kbd>1</kbd>–<kbd>5</kbd> to rate it.</p>
+      </header>
+      <ol class="items" data-items></ol>
+    </section>
+
+    <!-- ======================= Step: review ======================= -->
+    <section class="step step-review" data-step="review" hidden>
+      <header class="section-head">
+        <p class="eyebrow">Final step</p>
+        <h1 class="h2">Review your responses</h1>
+        <p class="muted">Select any statement to change your rating. Nothing is sent until you submit.</p>
+      </header>
+      <div class="review-grid">
+        <div data-review-list class="review-list"></div>
+        <aside class="card card-pad review-side">
+          <p class="eyebrow">Submitting as</p>
+          <p class="review-who" data-review-who></p>
+          <hr class="rule">
+          <label class="check">
+            <input type="checkbox" data-confirm>
+            <span>I confirm these ratings reflect how I genuinely work.</span>
+          </label>
+          <div class="alert" data-submit-error hidden></div>
+          <button class="btn btn-accent submit-btn" type="button" data-submit disabled>Submit responses</button>
+          <button class="btn btn-quiet btn-sm" type="button" data-edit-details>Edit my details</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ======================= Step: done ======================= -->
+    <section class="step step-done" data-step="done" hidden>
+      <div class="done-card card card-pad">
+        <div class="done-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" width="48" height="48"><circle cx="24" cy="24" r="23" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M15 24.5l6 6 12-13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h1 class="h2">Thank you, <span data-done-name></span>.</h1>
+        <p class="lede">Your self-assessment has been submitted to the hiring panel. They will use it to shape a structured conversation with you — it is not a pass/fail test.</p>
+        <p class="ref">Reference <span class="mono" data-done-code></span></p>
+        <p class="muted small">You can close this window.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- sticky step navigation -->
+  <div class="stepbar" data-stepbar hidden>
+    <div class="wrap">
+      <button class="btn btn-ghost" type="button" data-back>← Back</button>
+      <div class="stepbar-mid">
+        <span class="mono small" data-answered></span>
+        <ol class="dots" data-dots aria-hidden="true"></ol>
+      </div>
+      <button class="btn" type="button" data-next>Continue <span class="arrow" aria-hidden="true">→</span></button>
+    </div>
+  </div>
+
+  <dialog data-scale-dialog aria-labelledby="scale-title">
+    <div class="dialog-body">
+      <h2 class="h3" id="scale-title">Rating guide</h2>
+      <ul class="scale-list in-dialog" data-scale-list></ul>
+    </div>
+    <div class="dialog-actions"><button class="btn btn-sm" type="button" data-close-scale>Close</button></div>
+  </dialog>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <span>Zinnov · Growth Mindset &amp; Resilience Inventory</span>
+      <a href="/hr/">HR sign in</a>
+    </div>
+  </footer>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

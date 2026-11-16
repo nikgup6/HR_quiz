@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/hr.css">
+  <title>Candidates · Zinnov GMR Inventory</title>
+  <script type="module" src="/assets/js/hr-dashboard.js"></script>
+</head>
+<body data-page="dashboard">
+  <header class="topbar" data-shell></header>
+  <main class="wrap page">
+    <div class="page-head">
+      <div>
+        <p class="eyebrow">Self-assessment submissions</p>
+        <h1 class="h1">Candidates</h1>
+      </div>
+      <div class="page-actions">
+        <a class="btn btn-ghost btn-sm" href="/" target="_blank" rel="noopener">Open candidate link ↗</a>
+        <button class="btn btn-sm" type="button" data-export disabled>Export CSV</button>
+      </div>
+    </div>
+
+    <section class="stats" data-stats aria-label="Summary">
+      <div class="stat skeleton"></div><div class="stat skeleton"></div><div class="stat skeleton"></div><div class="stat skeleton"></div>
+    </section>
+
+    <section class="card table-card">
+      <div class="toolbar">
+        <label class="search">
+          <span class="visually-hidden">Search candidates</span>
+          <svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><circle cx="9" cy="9" r="6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Search name, email, phone or reference" data-search>
+        </label>
+        <select class="select select-sm" data-filter-band aria-label="Filter by band"><option value="">All bands</option></select>
+        <select class="select select-sm" data-filter-status aria-label="Filter by panel status">
+          <option value="">Any panel status</option>
+          <option value="pending">Pending interview</option>
+          <option value="interviewed">Interviewed</option>
+          <option value="closed">Closed</option>
+        </select>
+      </div>
+      <div class="table-scroll">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><button type="button" data-sort="name">Candidate</button></th>
+              <th class="hide-md">Contact</th>
+              <th class="hide-sm"><button type="button" data-sort="role_track">Role / track</button></th>
+              <th><button type="button" data-sort="submitted_at" class="sorted desc">Submitted</button></th>
+              <th class="num"><button type="button" data-sort="overall">Overall</button></th>
+              <th>Band</th>
+              <th class="hide-sm">Panel</th>
+            </tr>
+          </thead>
+          <tbody data-rows></tbody>
+        </table>
+      </div>
+      <div class="empty" data-empty hidden></div>
+    </section>
+  </main>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
