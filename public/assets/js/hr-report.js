@@ -2,6 +2,7 @@ import { BEHAVIOURS, ITEMS, RATING_SCALE, PANEL_SCALE, INSTRUMENT, evaluate, fmt
 import { $, $$, api, esc, fmtDate, fmtDateTime, bandClass, toast } from './ui.js';
 import { requireSession } from './hr-shell.js';
 import { radarSvg, scoreBarsHtml, hydrateBars } from './charts.js';
+import { executiveSummary } from './summary.js';
 
 const root = $('[data-report]');
 const id = new URLSearchParams(location.search).get('id');
@@ -57,6 +58,7 @@ function renderReport() {
 
     <nav class="subnav no-print" aria-label="Report sections">
       <a href="#overview">Overview</a>
+      <a href="#summary">Executive summary</a>
       <a href="#profile">Score profile</a>
       <a href="#interpretation">Panel interpretation</a>
       <a href="#panel">Interview &amp; panel review</a>
@@ -81,6 +83,13 @@ function renderReport() {
         <p class="insight accent">${esc(result.priorityText)}</p>
       </div>
       <p class="usenote small muted">${esc(INSTRUMENT.useNote)}</p>
+    </section>
+
+    <section id="summary" class="block">
+      <div class="block-head"><h2 class="h2">Consolidated executive summary</h2><p class="muted">Auto-generated overview of the candidate's behavioural profile across all five constructs.</p></div>
+      <div class="card card-pad exec-summary">
+        <p>${executiveSummary(c.ratings, result, c.name).map(esc).join(' ')}</p>
+      </div>
     </section>
 
     <section id="profile" class="block">
@@ -340,6 +349,6 @@ function bindReport() {
       if (en.isIntersecting) links.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === `#${en.target.id}`));
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  ['overview', 'profile', 'interpretation', 'panel', 'responses'].forEach((s) => io.observe($(`#${s}`)));
+  ['overview', 'summary', 'profile', 'interpretation', 'panel', 'responses'].forEach((s) => io.observe($(`#${s}`)));
 }
 

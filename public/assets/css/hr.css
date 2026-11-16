@@ -139,6 +139,7 @@
 .insight { font: 400 24px/1.25 var(--serif); margin: 8px 0 0; letter-spacing: -.01em; }
 .insight.accent { color: var(--accent-ink); }
 .ov-insight .rule { margin: 20px 0; }
+.exec-summary p { margin: 0; font-size: 16px; line-height: 1.65; max-width: 900px; }
 .usenote { grid-column: 1 / -1; margin: 2px 2px 0; }
 
 .profile-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 14px; }
