@@ -139,7 +139,13 @@
 .insight { font: 400 24px/1.25 var(--serif); margin: 8px 0 0; letter-spacing: -.01em; }
 .insight.accent { color: var(--accent-ink); }
 .ov-insight .rule { margin: 20px 0; }
-.exec-summary p { margin: 0; font-size: 16px; line-height: 1.65; max-width: 900px; }
+.exec-list { margin: 0; display: grid; gap: 0; }
+.exec-list > div { display: grid; grid-template-columns: 180px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.exec-list > div:first-child { padding-top: 0; }
+.exec-list > div:last-child { border-bottom: 0; padding-bottom: 0; }
+.exec-list dt { font: 500 11.5px/1.9 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.exec-list dd { margin: 0; font: 400 19px/1.4 var(--serif); }
+@media (max-width: 640px) { .exec-list > div { grid-template-columns: 1fr; gap: 4px; } }
 .usenote { grid-column: 1 / -1; margin: 2px 2px 0; }
 
 .profile-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 14px; }

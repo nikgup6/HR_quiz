@@ -152,3 +152,14 @@ kbd { font: 500 11px/1 var(--mono); padding: 3px 6px; border: 1px solid var(--li
 @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .stepbar-mid .small { white-space: nowrap; }
 @media (max-width: 400px) { .stepbar-mid .small { font-size: 11.5px; } }
+
+/* ---------------------------------------------------- honesty acknowledgement */
+.ack-dialog { width: min(580px, calc(100vw - 32px)); }
+.ack-dialog .dialog-body { padding: 28px 28px 8px; }
+.ack-dialog .h2 { margin: 8px 0 18px; font-size: 26px; }
+.ack-list { margin: 0 0 22px; padding: 0; list-style: none; display: grid; gap: 10px; }
+.ack-list li { position: relative; padding-left: 22px; font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+.ack-list li::before { content: ''; position: absolute; left: 4px; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.ack-check { padding: 14px 16px; background: var(--accent-wash); border: 1px solid #d8e3f2; border-radius: var(--r); color: var(--ink); }
+.ack-actions { padding: 20px 0 22px; }
+@media (max-width: 640px) { .ack-dialog .dialog-body { padding: 22px 20px 4px; } }

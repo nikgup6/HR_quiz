@@ -33,9 +33,6 @@ function loadDraft() {
 /* ------------------------------------------------------------ static content */
 
 function renderStatic() {
-  render($('[data-behaviour-list]'), html`${SECTIONS.map((s) => html`
-    <li><strong>${s.name}</strong><span>${s.definition.split(';')[0]}.</span></li>`)}`);
-
   const scale = html`${RATING_SCALE.map((r) => html`
     <li><b>${r.value}</b><span><em>${r.label}</em> — ${r.meaning}</span></li>`)}`;
   $$('[data-scale-list]').forEach((el) => render(el, scale));
@@ -82,12 +79,37 @@ function bindDetailsForm() {
     if (firstBad) { f.elements[firstBad].focus(); return; }
     state.details = values;
     saveDraft();
-    const firstOpen = SECTIONS.findIndex((s) => s.items.some((it) => state.ratings[it.n - 1] === null));
-    go(firstOpen === -1 ? 'review' : firstOpen);
+    openAcknowledgement();
   });
   f.addEventListener('input', (e) => {
     const field = e.target.closest('.field.invalid');
     if (field) { field.classList.remove('invalid'); $('.err', field).textContent = ''; }
+  });
+}
+
+/* ------------------------------------------------------------ honesty acknowledgement */
+
+function startAssessment() {
+  const firstOpen = SECTIONS.findIndex((s) => s.items.some((it) => state.ratings[it.n - 1] === null));
+  go(firstOpen === -1 ? 'review' : firstOpen);
+}
+
+function openAcknowledgement() {
+  const dlg = $('[data-ack-dialog]');
+  $('[data-ack-check]').checked = false;
+  $('[data-ack-ok]').disabled = true;
+  dlg.showModal();
+}
+
+function bindAcknowledgement() {
+  const dlg = $('[data-ack-dialog]');
+  $('[data-ack-check]').addEventListener('change', (e) => { $('[data-ack-ok]').disabled = !e.target.checked; });
+  $('[data-ack-cancel]').addEventListener('click', () => dlg.close());
+  $('[data-ack-form]').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!$('[data-ack-check]').checked) return;
+    dlg.close();
+    startAssessment();
   });
 }
 
@@ -99,7 +121,7 @@ function itemTemplate(it) {
   const name = `q${it.n}`;
   return html`
     <li class="item ${value ? 'answered' : ''}" id="item-${it.n}" data-item="${it.n}">
-      <fieldset class="item-fieldset" aria-describedby="meaning-${it.n}">
+      <fieldset class="item-fieldset">
         <legend class="item-head">
           <span class="item-no">${String(it.n).padStart(2, '0')}</span>
           <span class="item-text">${it.text}</span>
@@ -107,12 +129,11 @@ function itemTemplate(it) {
         <div class="scale">
           ${RATING_SCALE.map((r) => html`
             <input type="radio" id="${name}-${r.value}" name="${name}" value="${r.value}" ${value === r.value ? html`checked` : ''}>
-            <label for="${name}-${r.value}" title="${r.meaning}">
+            <label for="${name}-${r.value}">
               <span class="n">${r.value}</span><span class="l">${r.label}</span>
             </label>`)}
         </div>
       </fieldset>
-      <p class="meaning" id="meaning-${it.n}" aria-live="polite">${meaningText(value)}</p>
       <details class="reflect" ${reflection ? html`open` : ''}>
         <summary>Evidence / reflection (optional)</summary>
         <textarea class="textarea" maxlength="2000" data-reflect="${it.n}"
@@ -123,15 +144,12 @@ function itemTemplate(it) {
     </li>`;
 }
 
-function meaningText(value) {
-  const r = RATING_SCALE.find((x) => x.value === value);
-  return r ? html`<b>${r.label}.</b> ${r.meaning}.` : html`<span>Select the option that fits best.</span>`;
-}
+const questionRange = (s) => `Questions ${s.items[0].n}–${s.items.at(-1).n}`;
 
 function renderSection(i) {
   const s = SECTIONS[i];
   $('[data-section-count]').textContent = `Section ${i + 1} of ${SECTIONS.length}`;
-  $('[data-section-title]').textContent = s.name;
+  $('[data-section-title]').textContent = questionRange(s);
   render($('[data-items]'), html`${s.items.map(itemTemplate)}`);
 }
 
@@ -180,7 +198,6 @@ function setRating(n, v) {
   if (item) {
     item.classList.add('answered');
     item.classList.remove('missing');
-    render($(`#meaning-${n}`), meaningText(v));
   }
   saveDraft();
   updateProgress();
@@ -195,7 +212,7 @@ function renderReview() {
     const answered = s.items.filter((it) => state.ratings[it.n - 1] !== null).length;
     return html`
       <section class="review-block">
-        <h2><span>${s.name}</span><span class="mono muted">${answered}/5</span></h2>
+        <h2><span>${questionRange(s)}</span><span class="mono muted">${answered}/5</span></h2>
         ${s.items.map((it) => {
           const v = state.ratings[it.n - 1];
           const label = RATING_SCALE.find((r) => r.value === v)?.label || 'Not answered';
@@ -327,6 +344,7 @@ function bindScaleDialog() {
 
 renderStatic();
 bindDetailsForm();
+bindAcknowledgement();
 bindItems();
 bindReview();
 bindStepbar();

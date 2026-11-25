@@ -33,15 +33,13 @@
         <div class="intro-copy">
           <p class="eyebrow">Candidate self-assessment</p>
           <h1 class="display">Growth Mindset &amp; <em>Resilience</em> Inventory</h1>
-          <p class="lede">Rate how consistently each statement reflects your workplace behaviour. Complete all 25 items.</p>
+          <p class="lede">Rate how consistently each statement reflects your workplace behaviour. Complete all 25 questions.</p>
 
           <dl class="facts">
             <div><dt class="mono">25</dt><dd>statements</dd></div>
-            <div><dt class="mono">5</dt><dd>behaviours</dd></div>
+            <div><dt class="mono">5</dt><dd>short sections</dd></div>
             <div><dt class="mono">1–5</dt><dd>rating scale</dd></div>
           </dl>
-
-          <ol class="behaviour-list" data-behaviour-list></ol>
 
           <div class="scale-preview">
             <p class="eyebrow">The rating scale</p>
@@ -88,7 +86,6 @@
       <header class="section-head">
         <p class="eyebrow" data-section-count></p>
         <h1 class="h2 section-title" data-section-title></h1>
-        <p class="muted small keys-tip">Tip: focus a statement and press <kbd>1</kbd>–<kbd>5</kbd> to rate it.</p>
       </header>
       <ol class="items" data-items></ol>
     </section>
@@ -142,6 +139,28 @@
       <button class="btn" type="button" data-next>Continue <span class="arrow" aria-hidden="true">→</span></button>
     </div>
   </div>
+
+  <dialog class="ack-dialog" data-ack-dialog aria-labelledby="ack-title">
+    <form method="dialog" class="dialog-body" data-ack-form>
+      <p class="eyebrow">Before you begin</p>
+      <h2 class="h2" id="ack-title">A few things to keep in mind</h2>
+      <ul class="ack-list">
+        <li>There are no right or wrong answers. This is not a test you can pass or fail.</li>
+        <li>Rate each statement on how you actually behave at work, not how you think you should behave.</li>
+        <li>Answer all 25 questions on your own, without help from anyone else.</li>
+        <li>Your responses are shared only with the hiring panel, to guide a structured conversation with you.</li>
+        <li>You can review and change your answers before you submit.</li>
+      </ul>
+      <label class="check ack-check">
+        <input type="checkbox" data-ack-check>
+        <span>I have read and understood the above, and I confirm that I will answer every question honestly.</span>
+      </label>
+      <div class="dialog-actions ack-actions">
+        <button class="btn btn-ghost btn-sm" type="button" data-ack-cancel>Cancel</button>
+        <button class="btn btn-accent btn-sm" type="submit" data-ack-ok disabled>OK, start</button>
+      </div>
+    </form>
+  </dialog>
 
   <dialog data-scale-dialog aria-labelledby="scale-title">
     <div class="dialog-body">

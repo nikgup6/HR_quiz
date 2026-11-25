@@ -33,6 +33,7 @@ function renderReport() {
   const c = candidate;
   const result = evaluate(c.ratings);
   const panel = c.panel || {};
+  const summary = executiveSummary(result);
   document.title = `${c.name} · Panel insight report`;
 
   root.innerHTML = `
@@ -58,11 +59,11 @@ function renderReport() {
 
     <nav class="subnav no-print" aria-label="Report sections">
       <a href="#overview">Overview</a>
-      <a href="#summary">Executive summary</a>
+      ${summary ? '<a href="#summary">Executive summary</a>' : ''}
       <a href="#profile">Score profile</a>
       <a href="#interpretation">Panel interpretation</a>
-      <a href="#panel">Interview &amp; panel review</a>
       <a href="#responses">Candidate responses</a>
+      <a href="#panel">Interview &amp; panel review</a>
     </nav>
 
     <section id="overview" class="overview">
@@ -85,13 +86,18 @@ function renderReport() {
       <p class="usenote small muted">${esc(INSTRUMENT.useNote)}</p>
     </section>
 
+    ${summary ? `
     <section id="summary" class="block">
-      <div class="block-head"><h2 class="h2">Consolidated executive summary</h2><p class="muted">Auto-generated overview of the candidate's behavioural profile across all five constructs.</p></div>
+      <div class="block-head"><h2 class="h2">Executive summary</h2></div>
       <div class="card card-pad exec-summary">
-        <p>${executiveSummary(c.ratings, result, c.name).map(esc).join(' ')}</p>
+        <dl class="exec-list">
+          <div><dt>Key strength</dt><dd>${esc(summary.strength)}</dd></div>
+          <div><dt>Development area</dt><dd>${esc(summary.development)}</dd></div>
+          <div><dt>Interview probe</dt><dd>${esc(summary.probe)}</dd></div>
+        </dl>
       </div>
     </section>
-
+` : ''}
     <section id="profile" class="block">
       <div class="block-head"><h2 class="h2">Score profile</h2><p class="muted">Self-assessment scores by behaviour, averaged across each behaviour's five statements.</p></div>
       <div class="profile-grid">
@@ -349,6 +355,6 @@ function bindReport() {
       if (en.isIntersecting) links.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === `#${en.target.id}`));
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  ['overview', 'summary', 'profile', 'interpretation', 'panel', 'responses'].forEach((s) => io.observe($(`#${s}`)));
+  ['overview', 'summary', 'profile', 'interpretation', 'panel', 'responses'].map((s) => $(`#${s}`)).filter(Boolean).forEach((el) => io.observe(el));
 }
 

@@ -9,7 +9,7 @@ export const INSTRUMENT = {
   subtitle: 'Five observable GCC behaviours - reference, weighting and panel guidance',
   selfTitle: 'Candidate self-assessment',
   selfInstruction:
-    'Rate how consistently each statement reflects your workplace behaviour. Complete all 25 items.',
+    'Rate how consistently each statement reflects your workplace behaviour. Complete all 25 questions.',
   reportTitle: 'Panel insight report',
   reportSubtitle:
     'Growth Mindset & Resilience Inventory — self-assessment profile, panel insights and structured interview guide',
@@ -34,11 +34,11 @@ export const INSTRUMENT = {
 
 // Sheet "2 Self Assessment" F18:G22
 export const RATING_SCALE = [
-  { value: 1, label: 'Rarely True', meaning: 'I demonstrate this behaviour in few relevant situations, or usually need substantial guidance' },
-  { value: 2, label: 'Occasionally True', meaning: 'I demonstrate this behaviour in some situations, but inconsistently or with regular support' },
-  { value: 3, label: 'Sometimes True', meaning: 'I demonstrate this behaviour in relevant situations with reasonable independence though not consistently' },
-  { value: 4, label: 'Often True', meaning: 'I demonstrate this behaviour in most relevant situations independently and effectively' },
-  { value: 5, label: 'Consistently True', meaning: 'I demonstrate this behaviour reliably across varied relevant situations and can explain its impact' },
+  { value: 1, label: 'Rarely True', meaning: 'I am beginning to demonstrate this behaviour in relevant situations and am developing my understanding with support.' },
+  { value: 2, label: 'Occasionally True', meaning: 'I demonstrate this behaviour in some relevant situations and am gradually building consistency.' },
+  { value: 3, label: 'Sometimes True', meaning: 'I demonstrate this behaviour in relevant situations with reasonable independence and occasional guidance.' },
+  { value: 4, label: 'Often True', meaning: 'I demonstrate this behaviour independently and effectively in most relevant situations.' },
+  { value: 5, label: 'Consistently True', meaning: 'I demonstrate this behaviour reliably across varied relevant situations and can explain its positive impact.' },
 ];
 
 // Sheet "3 Panel Report" B17
